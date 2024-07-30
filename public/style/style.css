@@ -1,0 +1,23 @@
+body {
+  background-color: rgb(50, 70, 16);
+  color: rgb(255, 255, 255);
+}
+
+a:link,
+a:visited {
+  color: white;
+}
+
+a:hover {
+  box-shadow: 0px 0px 2px 2px rgba(240, 239, 239, 0.5);
+}
+
+.nav-links {
+  padding: 0;
+
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2rem;
+}
