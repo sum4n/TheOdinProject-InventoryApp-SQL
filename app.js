@@ -1,4 +1,5 @@
 const express = require("express");
+const router = require("./routes/itemsRouter");
 
 const app = express();
 
@@ -10,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static assests.
 app.use(express.static("public"));
+
+app.use("/", router);
 
 app.get("/", (req, res) => {
   res.send("hello world!");
