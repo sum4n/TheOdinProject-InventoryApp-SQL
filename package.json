@@ -2,7 +2,7 @@
   "name": "theodinproject-inventoryapp-sql",
   "version": "1.0.0",
   "description": "This is Odin Projects' Project: Inventory Application (reworked with postgresql)",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
