@@ -15,7 +15,9 @@ app.use(express.static("public"));
 app.use("/", router);
 
 app.get("/", (req, res) => {
-  res.send("hello world!");
+  res.render("pages/index", {
+    title: "Home",
+  });
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,13 +1,19 @@
 const asyncHandler = require("express-async-handler");
 
 exports.allItemsGet = asyncHandler(async (req, res) => {
-  res.send("Get all info about the items: WIP");
+  res.render("pages/items", {
+    title: "Items",
+  });
 });
 
 exports.allSlotsGet = asyncHandler(async (req, res) => {
-  res.send("Get all slots: WIP");
+  res.render("pages/slots", {
+    title: "Slots",
+  });
 });
 
 exports.allItemTypesGet = asyncHandler(async (req, res) => {
-  res.send("Get all Item Types: WIP");
+  res.render("pages/item_types", {
+    title: "Item Types",
+  });
 });
