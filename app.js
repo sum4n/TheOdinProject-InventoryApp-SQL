@@ -16,16 +16,17 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static assests.
 app.use(express.static(path.join(__dirname, "public")));
 
-// Routes
-const router = require("./routes/itemsRouter");
+// Import route files.
+const indexRoutes = require("./routes/index");
+const itemsRouter = require("./routes/items");
+const slotRouter = require("./routes/slots");
+const itemTypesRouter = require("./routes/item_types");
 
-app.use("/", router);
-
-app.get("/", (req, res) => {
-  res.render("pages/index", {
-    title: "Home",
-  });
-});
+// Use route files.
+app.use("/", indexRoutes);
+app.use("/items", itemsRouter);
+app.use("/slots", slotRouter);
+app.use("/item_types", itemTypesRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
