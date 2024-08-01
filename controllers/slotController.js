@@ -19,11 +19,15 @@ exports.getSlot = asyncHandler(async (req, res) => {
 });
 
 exports.createSlot_get = asyncHandler(async (req, res) => {
-  res.send("Create slot page GET (WIP)");
+  res.render("pages/slots/slotCreate", {
+    title: "Create Slot",
+  });
 });
 
 exports.createSlot_post = asyncHandler(async (req, res) => {
-  res.send("Create slot page POST (WIP)");
+  const { slot_name, slot_price } = req.body;
+  await db.insertSlot(slot_name, slot_price);
+  res.redirect("/slots");
 });
 
 exports.updateSlot_get = asyncHandler(async (req, res) => {
