@@ -1,11 +1,21 @@
 const asyncHandler = require("express-async-handler");
+const db = require("../db/slotQueries");
 
 exports.listSlots = asyncHandler(async (req, res) => {
-  res.send("Slot list page (WIP)");
+  const slots = await db.getAllSlots();
+  res.render("pages/slots/slots", {
+    title: "Slots list",
+    slots,
+  });
 });
 
 exports.getSlot = asyncHandler(async (req, res) => {
-  res.send("Get slot page (WIP)");
+  const slot = await db.getSlot(req.params.id);
+  res.render("pages/slots/slotDescription", {
+    title: "Slot Description",
+    slot,
+  });
+  // res.send(slot);
 });
 
 exports.createSlot_get = asyncHandler(async (req, res) => {

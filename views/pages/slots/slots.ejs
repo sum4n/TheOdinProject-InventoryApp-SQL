@@ -1,0 +1,19 @@
+<%- include('../../partials/head') %><%- include('../../partials/header') %>
+
+<h1>Slots:</h1>
+
+<% if (locals.slots.length == 0) {%>
+<p>No slots found</p>
+<% } else {%>
+
+<ul>
+  <% slots.forEach((slot) => { %>
+  <li>
+    <a href="/slots/<%= slot.slot_id %>">
+      Name: <%= slot.slot_name %> --- Price: <%= slot.slot_price %></a
+    >
+  </li>
+  <% }) %>
+</ul>
+
+<% } %>

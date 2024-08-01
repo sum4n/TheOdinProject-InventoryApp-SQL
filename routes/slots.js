@@ -4,9 +4,13 @@ const router = express.Router();
 const slotController = require("../controllers/slotController");
 
 router.get("/", slotController.listSlots);
-router.get("/:id", slotController.getSlot);
+
 router.get("/create", slotController.createSlot_get);
 router.post("/create", slotController.createSlot_post);
+
+// /:id should go below any /*
+router.get("/:id", slotController.getSlot);
+
 router.get("/:id/update", slotController.updateSlot_get);
 router.post("/:id/update", slotController.updateSlot_post);
 router.get("/:id/delete", slotController.deleteSlot_get);

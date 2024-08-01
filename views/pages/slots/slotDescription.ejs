@@ -1,0 +1,11 @@
+<%- include('../../partials/head') %> <%- include('../../partials/header') %>
+
+<h1>Slot Description:</h1>
+
+<% if (locals.slot) {%>
+<p>Slot name: <%= slot.slot_name %></p>
+<p>Price: <%= slot.slot_price %></p>
+<a href="/slots/<%= slot.slot_id %>/update">Update</a>
+<% } else {%>
+<p>Slot not found.</p>
+<% } %>
