@@ -30,10 +30,19 @@ async function deleteSlot(slot_id) {
   await pool.query("DELETE FROM slots WHERE slot_id = $1", [slot_id]);
 }
 
+async function getItemBySlot(slot_id) {
+  const { rows } = await pool.query(
+    "SELECT * FROM items JOIN slots ON slots.slot_id = items.slot_id WHERE items.slot_id = $1",
+    [slot_id]
+  );
+  return rows;
+}
+
 module.exports = {
   getAllSlots,
   getSlot,
   insertSlot,
   updateSlot,
   deleteSlot,
+  getItemBySlot,
 };
