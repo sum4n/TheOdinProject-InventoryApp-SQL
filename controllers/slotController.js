@@ -45,9 +45,37 @@ exports.updateSlot_post = asyncHandler(async (req, res) => {
 });
 
 exports.deleteSlot_get = asyncHandler(async (req, res) => {
-  res.send("Slot delete page GET (WIP)");
+  const [slot, items] = await Promise.all([
+    db.getSlot(req.params.id),
+    db.getItemBySlot(req.params.id),
+  ]);
+
+  if (slot == null) {
+    res.redirect("/slots");
+  }
+
+  res.render("pages/slots/slotDelete", {
+    title: "Delete slot",
+    items,
+    slot,
+  });
 });
 
 exports.deleteSlot_post = asyncHandler(async (req, res) => {
-  res.send("Slot delete page POST (WIP)");
+  const [slot, items] = await Promise.all([
+    db.getSlot(req.params.slot_id),
+    db.getItemBySlot(req.params.slot_id),
+  ]);
+
+  if (items.length > 0) {
+    res.render("pages/slots/slotDelete", {
+      title: "Delete slot",
+      items,
+      slot,
+    });
+    return;
+  } else {
+    await db.deleteSlot(req.params.id);
+    res.redirect("/slots");
+  }
 });
