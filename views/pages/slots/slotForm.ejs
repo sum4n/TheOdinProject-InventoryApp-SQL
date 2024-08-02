@@ -1,0 +1,29 @@
+<%- include('../../partials/head') %><%- include('../../partials/header') %>
+
+<h1><%= locals.title %> :</h1>
+
+<form method="POST">
+  <label for="slot_name">Slot Name:</label>
+  <input
+    type="text"
+    name="slot_name"
+    id="slot_name"
+    value="<%= locals.slot ? slot.slot_name : '' %>"
+  />
+  <label for="slot_price">Slot Price</label>
+  <input
+    type="text"
+    name="slot_price"
+    id="slot_price"
+    value="<%= locals.slot ? slot.slot_price : '' %>"
+  />
+  <% if (locals.slot) {%>
+  <input
+    type="hidden"
+    name="slot_id"
+    id="slot_id"
+    value="<%= slot.slot_id %>"
+  />
+  <% } %>
+  <button type="submit">Submit</button>
+</form>
