@@ -15,11 +15,10 @@ exports.getSlot = asyncHandler(async (req, res) => {
     title: "Slot Description",
     slot,
   });
-  // res.send(slot);
 });
 
 exports.createSlot_get = asyncHandler(async (req, res) => {
-  res.render("pages/slots/slotCreate", {
+  res.render("pages/slots/slotForm", {
     title: "Create Slot",
   });
 });
@@ -31,11 +30,18 @@ exports.createSlot_post = asyncHandler(async (req, res) => {
 });
 
 exports.updateSlot_get = asyncHandler(async (req, res) => {
-  res.send("Slot update page GET (WIP)");
+  const slot = await db.getSlot(req.params.id);
+  res.render("pages/slots/slotForm", {
+    title: "Update slot",
+    slot,
+  });
 });
 
 exports.updateSlot_post = asyncHandler(async (req, res) => {
-  res.send("Slot update page POST (WIP)");
+  const { slot_id, slot_name, slot_price } = req.body;
+  // console.log(slot_id, slot_name, slot_price);
+  await db.updateSlot(slot_id, slot_name, slot_price);
+  res.redirect(`/slots/${slot_id}`);
 });
 
 exports.deleteSlot_get = asyncHandler(async (req, res) => {
