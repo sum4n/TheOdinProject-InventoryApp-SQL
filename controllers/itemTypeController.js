@@ -1,7 +1,12 @@
 const asyncHandler = require("express-async-handler");
+const db = require("../db/itemTypeQueries");
 
 exports.listItemTypes = asyncHandler(async (req, res) => {
-  res.send("List all Item Types (WIP)");
+  let itemTypes = await db.getAllItemTypes();
+  res.render("pages/item_types/itemTypes", {
+    title: "Item Types",
+    itemTypes,
+  });
 });
 
 exports.getItemType = asyncHandler(async (req, res) => {

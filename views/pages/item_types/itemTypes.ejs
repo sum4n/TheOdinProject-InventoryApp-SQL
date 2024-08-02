@@ -1,0 +1,19 @@
+<%- include('../../partials/head') %><%- include('../../partials/header') %>
+
+<h1>Item Types:</h1>
+<% if (locals.itemTypes.length == 0) {%>
+<p>No item types found</p>
+<% } else { %>
+<ul>
+  <% locals.itemTypes.forEach((itemType) => { %>
+  <li>
+    <p>
+      <a href="/item_types/<%= itemType.item_type_id %>"
+        ><%= itemType.type_name %></a
+      >
+    </p>
+  </li>
+  <% }) %>
+</ul>
+
+<% } %>
