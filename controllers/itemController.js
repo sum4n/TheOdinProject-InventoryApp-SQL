@@ -10,7 +10,11 @@ exports.listItems = asyncHandler(async (req, res) => {
 });
 
 exports.getItem = asyncHandler(async (req, res) => {
-  res.send("Get item page (WIP)");
+  const item = await db.getItem(req.params.id);
+  res.render("pages/items/itemDescription", {
+    title: "Item Description",
+    item,
+  });
 });
 
 exports.createItem_get = asyncHandler(async (req, res) => {
