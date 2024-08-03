@@ -1,0 +1,10 @@
+<%- include('../../partials/head') %><%- include('../../partials/header') %>
+
+<h1>Item Type Description:</h1>
+<%if (locals.itemType) {%>
+<p>Item Type: <%= itemType.type_name %></p>
+<p><a href="/item_types/<%= itemType.item_type_id %>/update">Update</a></p>
+<p><a href="/item_types/<%= itemType.item_type_id %>/delete">Delete</a></p>
+<% } else { %>
+<p>Item type not found.</p>
+<% } %>
