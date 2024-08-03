@@ -18,11 +18,15 @@ exports.getItemType = asyncHandler(async (req, res) => {
 });
 
 exports.createItemType_get = asyncHandler(async (req, res) => {
-  res.send("Create Item Type GET (WIP)");
+  res.render("pages/item_types/itemTypeForm", {
+    title: "Create Item Type",
+  });
 });
 
 exports.createItemType_post = asyncHandler(async (req, res) => {
-  res.send("Create Item Type POST (WIP)");
+  const itemTypeName = req.body.type_name;
+  await db.insertItemType(itemTypeName);
+  res.redirect("/item_types");
 });
 
 exports.updateItemType_get = asyncHandler(async (req, res) => {
