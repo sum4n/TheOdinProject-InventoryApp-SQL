@@ -32,10 +32,19 @@ async function deleteItemType(item_type_id) {
   ]);
 }
 
+async function getItemsByItemType(item_type_id) {
+  const { rows } = await pool.query(
+    "SELECT * FROM item_types JOIN items ON item_types.item_type_id = items.item_type_id WHERE item_types.item_type_id = $1",
+    [item_type_id]
+  );
+  return rows;
+}
+
 module.exports = {
   getAllItemTypes,
   getItemType,
   insertItemType,
   updateItemType,
   deleteItemType,
+  getItemsByItemType,
 };
