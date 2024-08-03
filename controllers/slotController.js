@@ -53,6 +53,7 @@ exports.deleteSlot_get = asyncHandler(async (req, res) => {
 
   if (slot == null) {
     res.redirect("/slots");
+    return;
   }
 
   res.render("pages/slots/slotDelete", {
