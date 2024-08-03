@@ -17,13 +17,5 @@
     id="slot_price"
     value="<%= locals.slot ? slot.slot_price : '' %>"
   />
-  <% if (locals.slot) {%>
-  <input
-    type="hidden"
-    name="slot_id"
-    id="slot_id"
-    value="<%= slot.slot_id %>"
-  />
-  <% } %>
   <button type="submit">Submit</button>
 </form>

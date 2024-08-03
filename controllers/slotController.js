@@ -38,8 +38,9 @@ exports.updateSlot_get = asyncHandler(async (req, res) => {
 });
 
 exports.updateSlot_post = asyncHandler(async (req, res) => {
-  const { slot_id, slot_name, slot_price } = req.body;
-  // console.log(slot_id, slot_name, slot_price);
+  // Don't get id form body, it can be changed.
+  const slot_id = req.params.id;
+  const { slot_name, slot_price } = req.body;
   await db.updateSlot(slot_id, slot_name, slot_price);
   res.redirect(`/slots/${slot_id}`);
 });
