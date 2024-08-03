@@ -30,11 +30,19 @@ exports.createItemType_post = asyncHandler(async (req, res) => {
 });
 
 exports.updateItemType_get = asyncHandler(async (req, res) => {
-  res.send("Update Item Type GET (WIP)");
+  let itemType = await db.getItemType(req.params.id);
+  res.render("pages/item_types/itemTypeForm", {
+    title: "Update Item Type",
+    itemType,
+  });
 });
 
 exports.updateItemType_post = asyncHandler(async (req, res) => {
-  res.send("Update Item Type POST (WIP)");
+  const type_name = req.body.type_name;
+  // Don't get id from body, it can be changed by making the input field visible.
+  const id = req.params.id;
+  await db.updateItemType(id, type_name);
+  res.redirect(`/item_types/${id}`);
 });
 
 exports.deleteItemType_get = asyncHandler(async (req, res) => {
