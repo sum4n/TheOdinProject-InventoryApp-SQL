@@ -1,0 +1,23 @@
+<%- include('../../partials/head') %> <%- include('../../partials/header') %>
+
+<h1><%= locals.title %></h1>
+
+<% if (locals.item) {%>
+<p>Item name: <%= item.name %></p>
+<img
+  src="<%= item.image_url %>"
+  alt="<%= item.name %> image" width="64" height="64"
+></img>
+<p>Item quality: <%= item.quality %></p>
+<p>Item description: <%= item.description %></p>
+<p>
+  Item Slot:
+  <a href="/slots/<%= item.slot_id %>"><%= item.slot_name %></a>
+</p>
+<p>
+  Item Type:
+  <a href="/item_types/<%= item.item_type_id  %>"><%= item.type_name %></a>
+</p>
+<% } else { %>
+<p>Item not found.</p>
+<% } %>
