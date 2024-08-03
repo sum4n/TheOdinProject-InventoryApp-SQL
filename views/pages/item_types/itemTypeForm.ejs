@@ -1,6 +1,6 @@
 <%- include('../../partials/head') %><%- include('../../partials/header') %>
 
-<h1><%= locals.title %></h1>
+<h1><%= locals.title %>:</h1>
 
 <form method="POST">
   <label for="type_name">Item Type Name:</label>
@@ -10,6 +10,7 @@
     id="type_name"
     placeholder="Leather, Mail, etc..."
     required
+    value="<%= locals.itemType ? itemType.type_name : '' %>"
   />
   <button type="submit">Submit</button>
 </form>
