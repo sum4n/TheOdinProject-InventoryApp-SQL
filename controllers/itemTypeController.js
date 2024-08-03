@@ -46,9 +46,40 @@ exports.updateItemType_post = asyncHandler(async (req, res) => {
 });
 
 exports.deleteItemType_get = asyncHandler(async (req, res) => {
-  res.send("Delete Item Type GET (WIP)");
+  const id = req.params.id;
+  const [itemType, items] = await Promise.all([
+    db.getItemType(id),
+    db.getItemsByItemType(id),
+  ]);
+
+  if (itemType == null) {
+    res.redirect("/item_types");
+    return;
+  }
+
+  res.render("pages/item_types/itemTypeDelete", {
+    title: "Delete Item Type",
+    itemType,
+    items,
+  });
 });
 
 exports.deleteItemType_post = asyncHandler(async (req, res) => {
-  res.send("Delete Item Type POST (WIP)");
+  const id = req.params.id;
+  const [itemType, items] = await Promise.all([
+    db.getItemType(id),
+    db.getItemsByItemType(id),
+  ]);
+
+  if (items.length > 0) {
+    res.render("pages/item_types/itemTypeDelete", {
+      title: "Delete Item Type",
+      itemType,
+      items,
+    });
+    return;
+  } else {
+    await db.deleteItemType(id);
+    res.redirect("/item_types");
+  }
 });
