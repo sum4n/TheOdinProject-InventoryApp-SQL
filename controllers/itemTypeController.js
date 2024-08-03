@@ -10,7 +10,11 @@ exports.listItemTypes = asyncHandler(async (req, res) => {
 });
 
 exports.getItemType = asyncHandler(async (req, res) => {
-  res.send("Get single Item Type (WIP)");
+  let itemType = await db.getItemType(req.params.id);
+  res.render("pages/item_types/itemTypeDescription", {
+    title: "Item Type Description",
+    itemType,
+  });
 });
 
 exports.createItemType_get = asyncHandler(async (req, res) => {
