@@ -1,3 +1,33 @@
-<%- include('../partials/head') %><%- include('../partials/header') %>
+<%- include('../../partials/head') %> <%- include('../../partials/header') %>
 
 <h1>Items:</h1>
+
+<% if (locals.items.length == 0) {%>
+<p>Not items found.</p>
+<% } else { %>
+<hr />
+<% locals.items.forEach((item) => {%>
+<ul>
+  <li>
+    <p>Item name: <a href="/items/<%= item.item_id %>"><%= item.name %></a></p>
+  </li>
+  <li>
+    <p>Item quality: <%= item.quality %></p>
+  </li>
+  <li>
+    <p>Item description: <%= item.description %></p>
+  </li>
+  <li>
+    <p>
+      Item Slot: <a href="/slots/<%= item.slot_id %>"><%= item.slot_name %></a>
+    </p>
+  </li>
+  <li>
+    <p>
+      Item Type:
+      <a href="/item_types/<%= item.item_type_id  %>"><%= item.type_name %></a>
+    </p>
+  </li>
+</ul>
+<hr />
+<% }) } %>
