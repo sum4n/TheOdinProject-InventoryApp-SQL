@@ -79,9 +79,20 @@ exports.updateItem_post = asyncHandler(async (req, res) => {
 });
 
 exports.deleteItem_get = asyncHandler(async (req, res) => {
-  res.send("Delete item page GET (WIP)");
+  const item = await db.getItem(req.params.id);
+
+  if (item == null) {
+    res.redirect("/items");
+    return;
+  }
+
+  res.render("pages/items/itemDelete", {
+    title: "Delete Item",
+    item,
+  });
 });
 
 exports.deleteItem_post = asyncHandler(async (req, res) => {
-  res.send("Delete item page POST (WIP)");
+  await db.deleteItem(req.params.id);
+  res.redirect("/items");
 });
