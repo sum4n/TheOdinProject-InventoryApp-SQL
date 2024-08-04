@@ -1,5 +1,17 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 const db = require("../db/slotQueries");
+
+const validateSlotData = [
+  body("slot_name")
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Slot name must be between 1 - 50 characters."),
+  body("slot_price")
+    .trim()
+    .isInt({ min: 0 })
+    .withMessage("Price must be a positive integer"),
+];
 
 exports.listSlots = asyncHandler(async (req, res) => {
   const slots = await db.getAllSlots();
@@ -23,11 +35,28 @@ exports.createSlot_get = asyncHandler(async (req, res) => {
   });
 });
 
-exports.createSlot_post = asyncHandler(async (req, res) => {
-  const { slot_name, slot_price } = req.body;
-  await db.insertSlot(slot_name, slot_price);
-  res.redirect("/slots");
-});
+exports.createSlot_post = [
+  validateSlotData,
+  asyncHandler(async (req, res) => {
+    const { slot_name, slot_price } = req.body;
+    const slot = {
+      slot_name,
+      slot_price,
+    };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("pages/slots/slotForm", {
+        title: "Create Slot",
+        slot,
+        errors: errors.array(),
+      });
+    }
+
+    await db.insertSlot(slot_name, slot_price);
+    res.redirect("/slots");
+  }),
+];
 
 exports.updateSlot_get = asyncHandler(async (req, res) => {
   const slot = await db.getSlot(req.params.id);
@@ -37,13 +66,31 @@ exports.updateSlot_get = asyncHandler(async (req, res) => {
   });
 });
 
-exports.updateSlot_post = asyncHandler(async (req, res) => {
-  // Don't get id form body, it can be changed.
-  const slot_id = req.params.id;
-  const { slot_name, slot_price } = req.body;
-  await db.updateSlot(slot_id, slot_name, slot_price);
-  res.redirect(`/slots/${slot_id}`);
-});
+exports.updateSlot_post = [
+  validateSlotData,
+  asyncHandler(async (req, res) => {
+    // Don't get id form body, it can be changed.
+    const slot_id = req.params.id;
+    const { slot_name, slot_price } = req.body;
+
+    const slot = {
+      slot_name,
+      slot_price,
+    };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("pages/slots/slotForm", {
+        title: "Update slot",
+        slot,
+        errors: errors.array(),
+      });
+    }
+
+    await db.updateSlot(slot_id, slot_name, slot_price);
+    res.redirect(`/slots/${slot_id}`);
+  }),
+];
 
 exports.deleteSlot_get = asyncHandler(async (req, res) => {
   const [slot, items] = await Promise.all([
