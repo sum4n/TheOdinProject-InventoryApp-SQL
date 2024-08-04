@@ -1,0 +1,46 @@
+<%- include('../../partials/head') %> <%- include('../../partials/header') %>
+
+<h1><%= locals.title %>:</h1>
+
+<form method="POST">
+  <label for="name">Item name: </label>
+  <input type="text" name="name" id="name" placeholder="Item name" required />
+
+  <label for="slot_id">Choose a slot: </label>
+  <select name="slot_id" id="slot_id" required>
+    <option value="">--Please select a slot--</option>
+    <% locals.allSlots.forEach((slot) => {%>
+    <option value="<%= slot.slot_id %>"><%= slot.slot_name %></option>
+    <% }) %>
+  </select>
+
+  <label for="item_type_id">Choose an item type: </label>
+  <select name="item_type_id" id="item_type_id" required>
+    <option value="">--Please select an item type--</option>
+    <% locals.allItemTypes.forEach((itemType) => {%>
+    <option value="<%= itemType.item_type_id %>">
+      <%= itemType.type_name %>
+    </option>
+    <% }) %>
+  </select>
+
+  <label for="ilvl">Item Level: </label>
+  <select name="ilvl" id="ilvl" required>
+    <% [251, 264].forEach((value) => {%>
+    <option value="<%= value %>"><%= value %></option>
+    <% }) %>
+  </select>
+
+  <label for="description">Description: </label>
+  <input
+    type="text"
+    name="description"
+    id="description"
+    placeholder="Item Description"
+  />
+
+  <label for="image_url">Image URL: </label>
+  <input type="url" name="image_url" id="image_url" />
+
+  <button type="submit">Submit</button>
+</form>
