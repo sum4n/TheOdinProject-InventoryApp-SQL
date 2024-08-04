@@ -13,6 +13,7 @@ exports.listItems = asyncHandler(async (req, res) => {
 
 exports.getItem = asyncHandler(async (req, res) => {
   const item = await db.getItem(req.params.id);
+  console.log(item);
   res.render("pages/items/itemDescription", {
     title: "Item Description",
     item,
@@ -47,11 +48,34 @@ exports.createItem_post = asyncHandler(async (req, res) => {
 });
 
 exports.updateItem_get = asyncHandler(async (req, res) => {
-  res.send("Update item page GET (WIP)");
+  const [item, allSlots, allItemTypes] = await Promise.all([
+    db.getItem(req.params.id),
+    dbSlot.getAllSlots(),
+    dbItemType.getAllItemTypes(),
+  ]);
+
+  res.render("pages/items/itemForm", {
+    title: "Create an item",
+    item,
+    allSlots,
+    allItemTypes,
+  });
 });
 
 exports.updateItem_post = asyncHandler(async (req, res) => {
-  res.send("Update item page POST (WIP)");
+  const { name, slot_id, item_type_id, ilvl, description, image_url } =
+    req.body;
+  const item_id = req.params.id;
+  await db.updateItem(
+    item_id,
+    name,
+    item_type_id,
+    slot_id,
+    ilvl,
+    description,
+    image_url
+  );
+  res.redirect("/items");
 });
 
 exports.deleteItem_get = asyncHandler(async (req, res) => {
