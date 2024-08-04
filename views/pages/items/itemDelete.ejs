@@ -1,0 +1,15 @@
+<%- include('../../partials/head') %> <%- include('../../partials/header') %>
+
+<h1><%= locals.title %></h1>
+
+<p>
+  Do you really want to delete
+  <a href="/items/<%= item.item_id %>">
+    <%= item.name %>
+    <img src="<%= item.image_url %>" alt="Item image" width="48" height="48" />
+  </a>
+</p>
+
+<form method="POST">
+  <button type="submit">Delete</button>
+</form>
