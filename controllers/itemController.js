@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/itemQueries");
+const dbSlot = require("../db/slotQueries");
+const dbItemType = require("../db/itemTypeQueries");
 
 exports.listItems = asyncHandler(async (req, res) => {
   const items = await db.getAllItems();
@@ -18,11 +20,30 @@ exports.getItem = asyncHandler(async (req, res) => {
 });
 
 exports.createItem_get = asyncHandler(async (req, res) => {
-  res.send("Create item page GET (WIP)");
+  const [allSlots, allItemTypes] = await Promise.all([
+    dbSlot.getAllSlots(),
+    dbItemType.getAllItemTypes(),
+  ]);
+
+  res.render("pages/items/itemForm", {
+    title: "Create an item",
+    allSlots,
+    allItemTypes,
+  });
 });
 
 exports.createItem_post = asyncHandler(async (req, res) => {
-  res.send("Create item page POST (WIP)");
+  const { name, slot_id, item_type_id, ilvl, description, image_url } =
+    req.body;
+  await db.insertItem(
+    name,
+    item_type_id,
+    slot_id,
+    ilvl,
+    description,
+    image_url
+  );
+  res.redirect("/items");
 });
 
 exports.updateItem_get = asyncHandler(async (req, res) => {
