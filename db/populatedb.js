@@ -64,8 +64,9 @@ VALUES
 
 INSERT INTO items(name, item_type_id, slot_id, ilvl, image_url)
 VALUES
-('Belt of Omission', 1, 4, '264', 'https://static.wikia.nocookie.net/wowwiki/images/6/6d/Inv_belt_66.png/revision/latest/scale-to-width-down/32?cb=20091028035143'),
-('Cat Burglar''s Grips', 4, 6, '264', 'https://static.wikia.nocookie.net/wowwiki/images/6/6c/Inv_gauntlets_79.png/revision/latest?cb=20090708233821');
+('Belt of Omission', 1, 4, '264', 'https://static.wikia.nocookie.net/wowwiki/images/6/6d/Inv_belt_66.png'),
+('Circle of Ossus', 1, 4, '264', 'https://static.wikia.nocookie.net/wowwiki/images/6/63/Inv_belt_68.png'),
+('Cat Burglar''s Grips', 4, 6, '264', 'https://static.wikia.nocookie.net/wowwiki/images/6/6c/Inv_gauntlets_79.png');
 `;
 
 async function main() {

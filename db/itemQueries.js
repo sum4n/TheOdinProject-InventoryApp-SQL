@@ -34,14 +34,13 @@ async function updateItem(
   name,
   item_type_id,
   slot_id,
-  quality,
   ilvl,
   description,
   image_url
 ) {
   await pool.query(
-    "UPDATE items SET name = $1, item_type_id = $2, slot_id = $3, quality = $4, ilvl = $5, description = $6, image_url = $7 WHERE item_id = $8",
-    [name, item_type_id, slot_id, quality, ilvl, description, image_url, id]
+    "UPDATE items SET name = $1, item_type_id = $2, slot_id = $3, ilvl = $4, description = $5, image_url = $6 WHERE item_id = $7",
+    [name, item_type_id, slot_id, ilvl, description, image_url, id]
   );
 }
 
