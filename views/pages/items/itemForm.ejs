@@ -4,13 +4,22 @@
 
 <form method="POST">
   <label for="name">Item name: </label>
-  <input type="text" name="name" id="name" placeholder="Item name" required />
+  <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="Item name"
+    required
+    value="<%= locals.item ? item.name : '' %>"
+  />
 
   <label for="slot_id">Choose a slot: </label>
   <select name="slot_id" id="slot_id" required>
     <option value="">--Please select a slot--</option>
     <% locals.allSlots.forEach((slot) => {%>
-    <option value="<%= slot.slot_id %>"><%= slot.slot_name %></option>
+    <option <%= item.slot_id == slot.slot_id ? 'selected' : '' %> value="<%= slot.slot_id %>">
+      <%= slot.slot_name %>
+    </option>
     <% }) %>
   </select>
 
@@ -18,7 +27,7 @@
   <select name="item_type_id" id="item_type_id" required>
     <option value="">--Please select an item type--</option>
     <% locals.allItemTypes.forEach((itemType) => {%>
-    <option value="<%= itemType.item_type_id %>">
+    <option <%= item.item_type_id == itemType.item_type_id ? 'selected' : '' %> value="<%= itemType.item_type_id %>">
       <%= itemType.type_name %>
     </option>
     <% }) %>
@@ -26,8 +35,11 @@
 
   <label for="ilvl">Item Level: </label>
   <select name="ilvl" id="ilvl" required>
+    <option value="">--Please select item level--</option>
     <% [251, 264].forEach((value) => {%>
-    <option value="<%= value %>"><%= value %></option>
+    <option value="<%= value %>" <%= item.ilvl == value ? 'selected' : '' %>>
+      <%= value %>
+    </option>
     <% }) %>
   </select>
 
@@ -37,10 +49,16 @@
     name="description"
     id="description"
     placeholder="Item Description"
+    value="<%= locals.item ? item.description : '' %>"
   />
 
   <label for="image_url">Image URL: </label>
-  <input type="url" name="image_url" id="image_url" />
+  <input
+    type="url"
+    name="image_url"
+    id="image_url"
+    value="<%= locals.item ? item.image_url : '' %>"
+  />
 
   <button type="submit">Submit</button>
 </form>
