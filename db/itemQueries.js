@@ -19,14 +19,13 @@ async function insertItem(
   name,
   item_type_id,
   slot_id,
-  quality,
   ilvl,
   description,
   image_url
 ) {
   await pool.query(
-    "INSERT INTO items(name, item_type_id, slot_id, quality, ilvl, description, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-    [name, item_type_id, slot_id, quality, ilvl, description, image_url]
+    "INSERT INTO items(name, item_type_id, slot_id, ilvl, description, image_url) VALUES ($1, $2, $3, $4, $5, $6)",
+    [name, item_type_id, slot_id, ilvl, description, image_url]
   );
 }
 
