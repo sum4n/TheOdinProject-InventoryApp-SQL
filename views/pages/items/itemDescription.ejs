@@ -6,9 +6,13 @@
 <p>Item name: <%= item.name %></p>
 <img
   src="<%= item.image_url %>"
-  alt="<%= item.name %> image" width="64" height="64"
-></img>
+  alt="<%= item.name %> image"
+  width="64"
+  height="64"
+/>
 <p>Item quality: <%= item.quality %></p>
+<p>Item level: <%= item.ilvl %></p>
+<p>Price: <%= item.slot_price %> Emblem of Frost</p>
 <p>Item description: <%= item.description %></p>
 <p>
   Item Slot:
@@ -18,6 +22,8 @@
   Item Type:
   <a href="/item_types/<%= item.item_type_id  %>"><%= item.type_name %></a>
 </p>
+<p><a href="/items/<%= item.item_id %>/update">Update</a></p>
+<p><a href="/items/<%= item.item_id %>/delete">Delete</a></p>
 <% } else { %>
 <p>Item not found.</p>
 <% } %>
