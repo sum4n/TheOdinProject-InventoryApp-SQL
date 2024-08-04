@@ -9,13 +9,25 @@
     name="slot_name"
     id="slot_name"
     value="<%= locals.slot ? slot.slot_name : '' %>"
+    required
   />
   <label for="slot_price">Slot Price</label>
   <input
-    type="text"
+    type="number"
     name="slot_price"
     id="slot_price"
     value="<%= locals.slot ? slot.slot_price : '' %>"
+    required
   />
   <button type="submit">Submit</button>
 </form>
+
+<% if (locals.errors) {%>
+<ul>
+  <% errors.forEach(error => {%>
+  <li>
+    <p><%= error.msg %></p>
+  </li>
+  <% }) %>
+</ul>
+<% } %>
