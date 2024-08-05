@@ -14,3 +14,13 @@
   />
   <button type="submit">Submit</button>
 </form>
+
+<% if (locals.errors) {%>
+<ul>
+  <% errors.forEach(error => {%>
+  <li>
+    <p><%= error.msg %></p>
+  </li>
+  <% }) %>
+</ul>
+<% } %>
