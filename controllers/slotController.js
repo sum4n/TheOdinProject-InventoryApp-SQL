@@ -2,15 +2,22 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const db = require("../db/slotQueries");
 
+const isLetterHyphenApostrophe = (value) => {
+  return /^[A-Za-z\s'-]+$/.test(value);
+};
 const validateSlotData = [
   body("slot_name")
     .trim()
     .isLength({ min: 1, max: 50 })
-    .withMessage("Slot name must be between 1 - 50 characters."),
+    .withMessage("Slot name must be between 1 - 50 characters.")
+    .custom(isLetterHyphenApostrophe)
+    .withMessage(
+      "Slot name can only include a-z characters, hyphen and apostrophe."
+    ),
   body("slot_price")
     .trim()
-    .isInt({ min: 0 })
-    .withMessage("Price must be a positive integer"),
+    .isInt({ min: 0, max: 90 })
+    .withMessage("Price must be a positive integer between 0-90"),
 ];
 
 exports.listSlots = asyncHandler(async (req, res) => {

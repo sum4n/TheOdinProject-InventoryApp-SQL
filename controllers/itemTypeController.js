@@ -53,7 +53,7 @@ exports.createItemType_post = [
       });
     }
 
-    await db.insertItemType(itemTypeName);
+    await db.insertItemType(type_name);
     res.redirect("/item_types");
   }),
 ];
