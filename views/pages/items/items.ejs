@@ -9,23 +9,12 @@
 <% locals.items.forEach((item) => {%>
 <ul>
   <li>
-    <p>Item name: <a href="/items/<%= item.item_id %>"><%= item.name %></a></p>
-  </li>
-  <li>
-    <p>Item quality: <%= item.quality %></p>
-  </li>
-  <li>
-    <p>Item description: <%= item.description %></p>
-  </li>
-  <li>
     <p>
-      Item Slot: <a href="/slots/<%= item.slot_id %>"><%= item.slot_name %></a>
-    </p>
-  </li>
-  <li>
-    <p>
-      Item Type:
-      <a href="/item_types/<%= item.item_type_id  %>"><%= item.type_name %></a>
+      Item name:
+      <a href="/items/<%= item.item_id %>"
+        ><%= item.name %> -
+        <img src="<%=item.image_url %>" width="48" height="48"
+      /></a>
     </p>
   </li>
 </ul>
