@@ -1,22 +1,41 @@
 <%- include('../../partials/head') %> <%- include('../../partials/header') %>
-
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
 <h1>Items:</h1>
 
 <% if (locals.items.length == 0) {%>
 <p>Not items found.</p>
 <% } else { %>
 <hr />
-<% locals.items.forEach((item) => {%>
-<ul>
-  <li>
-    <p>
-      Item name:
-      <a href="/items/<%= item.item_id %>"
-        ><%= item.name %> -
-        <img src="<%=item.image_url %>" width="48" height="48"
-      /></a>
-    </p>
-  </li>
-</ul>
-<hr />
+<% locals.types.forEach((type) => {%>
+<table style="width: 50%">
+  <h3><%= type.type_name %></h3>
+  <tr>
+    <th>Item</th>
+    <th>Slot</th>
+    <th>Cost</th>
+  </tr>
+  <% locals.items.forEach((item)=> { %> <% if(item.type_name == type.type_name)
+  {%>
+  <tr>
+    <td>
+      <span>
+        <img src="<%= item.image_url %>" width="18" height="18" />
+      </span>
+      <span> [<%= item.name %>] </span>
+    </td>
+    <td><%= item.slot_name %></td>
+    <td>
+      <%= item.slot_price %><span
+        ><img src="../../../public/images/frostemblem.webp" alt=""
+      /></span>
+    </td>
+  </tr>
+  <% } %> <% }) %>
+</table>
 <% }) } %>
