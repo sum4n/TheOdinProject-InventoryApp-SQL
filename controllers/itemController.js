@@ -52,10 +52,15 @@ const validateItemFormData = [
 ];
 
 exports.listItems = asyncHandler(async (req, res) => {
-  const items = await db.getAllItems();
+  const [items, item_types] = await Promise.all([
+    db.getAllItems(),
+    db.getOnlyPopulatedItemTypes(),
+  ]);
+
   res.render("pages/items/items", {
     title: "Items List",
     items,
+    types: item_types,
   });
 });
 
