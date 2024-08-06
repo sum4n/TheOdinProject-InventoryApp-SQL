@@ -7,6 +7,14 @@ async function getAllItems() {
   return rows;
 }
 
+async function getOnlyPopulatedItemTypes() {
+  const { rows } = await pool.query(
+    "SELECT DISTINCT(item_types.type_name) FROM items  JOIN item_types ON items.item_type_id = item_types.item_type_id GROUP BY item_types.type_name ORDER BY item_types.type_name ASC"
+  );
+
+  return rows;
+}
+
 async function getItem(id) {
   const { rows } = await pool.query(
     "SELECT * FROM items JOIN slots ON slots.slot_id=items.slot_id JOIN item_types ON item_types.item_type_id=items.item_type_id WHERE items.item_id=($1)",
@@ -50,6 +58,7 @@ async function deleteItem(id) {
 
 module.exports = {
   getAllItems,
+  getOnlyPopulatedItemTypes,
   getItem,
   insertItem,
   updateItem,
