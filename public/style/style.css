@@ -21,3 +21,9 @@ a:hover {
   justify-content: flex-start;
   gap: 2rem;
 }
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
