@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(50, 70, 16);
+  background-color: #202020;
   color: rgb(255, 255, 255);
 }
 
@@ -13,12 +13,14 @@ a:hover {
 }
 
 .nav-links {
-  padding: 0;
-
+  padding-left: 10px;
+  background-color: #062540;
+  height: 50px;
   /* border: 1px solid black; */
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
+
   gap: 2rem;
 }
 
@@ -28,10 +30,15 @@ a:hover {
   gap: 20px;
 }
 
-table,
+table {
+  padding: 2px;
+  border: 1px solid rgba(128, 128, 128, 0.486);
+  background-color: #181818;
+}
+
 th,
 td {
-  border: 1px solid black;
+  background-color: #202020;
 }
 
 .table_title {
@@ -48,9 +55,15 @@ td {
   width: 100px;
 }
 
+.th_item,
+.th_slot,
+.th_cost {
+  background-color: #062540;
+}
 .itemLink a:link,
-a:visited {
+.itemLink a:visited {
   text-decoration: none;
+  color: #8e30cf;
 }
 
 .itemLink a:hover {
