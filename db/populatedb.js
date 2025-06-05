@@ -1,5 +1,13 @@
 #! /usr/bin/env node
 
+// Get arguments passed on command line.
+const userArgs = process.argv.slice(2);
+const connectionString = userArgs[0];
+
+if (connectionString == undefined) {
+  return;
+}
+
 const { Client } = require("pg");
 
 const SQL = `
@@ -71,10 +79,7 @@ VALUES
 
 async function main() {
   console.log("seeding...");
-  const client = new Client({
-    connectionString:
-      "postgresql://sdas:jalpaiguri@localhost:5432/eof_inventory",
-  });
+  const client = new Client({ connectionString });
   await client.connect();
   await client.query(SQL);
   await client.end();
