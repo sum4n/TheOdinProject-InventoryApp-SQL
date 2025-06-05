@@ -1,4 +1,4 @@
-const pool = require("./db");
+const pool = require("./pool");
 
 async function getAllSlots() {
   const { rows } = await pool.query("SELECT * FROM slots");

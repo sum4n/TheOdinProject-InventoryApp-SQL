@@ -1,4 +1,4 @@
-const pool = require("./db");
+const pool = require("./pool");
 
 async function getAllItemTypes() {
   const { rows } = await pool.query("SELECT * FROM item_types");
